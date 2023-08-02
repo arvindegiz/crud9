@@ -18,6 +18,10 @@ Route::get('/', function () {
 });
 
 Route::get('/employee',[EmployeeController::class,'index'])->name('employee.index');
-Auth::routes();
+Route::get('/employee/create',[EmployeeController::class,'create'])->name('employee.create');
+Route::post('/employee',[EmployeeController::class,'store'])->name('employee.store');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
