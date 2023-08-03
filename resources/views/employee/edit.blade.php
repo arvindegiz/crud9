@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LARAVEL 9 CRUD OPERATION </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+<body>
+    <div class="bg-dark py-3">
+        <div class="container">
+            <div class="h4 text-white">LARAVEL 9 CRUD OPERATION</div>
+        </div>
+    </div>
+    <div class="container py-3">
+        <div class="d-flex justify-content-between py-3">
+            <div class="h4">Edit Employees</div>
+            <div>
+                <a href="{{ route('employee.index') }}" class="btn btn-primary">Back</a>
+            </div>
+        </div>
+        <form action="{{ route('employee.update',$employee->id) }}" method="post" enctype="multipart/form-data">
+        @csrf
+        @method('put')
+            <div class="crard border-0 shadow-lg">
+                <div class="card-body">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" name="name" id="neme" placeholder="Enrer Name" 
+                    class="form-control @error('name') is-invalid @enderror" value="{{ old('name',$employee->name)}}">
+                    @error('name')
+                    <p class="invalid-feedback">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="text" name="email" id="email" placeholder="Enrer Email" 
+                    class="form-control @error('email') is-invalid @enderror" value="{{ old('email',$employee->email)}}">
+                    @error('email')
+                    <p class="invalid-feedback">{{ $message }}</p>
+                    @enderror 
+                </div>
+
+                <div class="mb-3">
+                    <label for="address" class="form-label">Address</label>
+                    <textarea name="address" id="address" cols="30" rows="4" placeholder="Enter the Address" 
+                    class="form-control" value="{{ old('address',$employee->address)}}"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label"></label>
+                    <input type="file" name="image" class="@error('image') is-invalid @enderror">
+                    @error('image')
+                    <p class="invalid-feedback">{{ $message }}</p>
+                    @enderror 
+
+                    @if($employee->image != '' && file_exists(public_path().'/upload/employees/'.
+                    $employee->image))
+                    <img src="{{ url('upload/employees/'.$employee->image) }}" alt="img" width="100"
+                    height="100">
+                    @endif
+                </div>
+
+                </div>
+
+            </div>
+            <button class="btn btn-primary my-3">Update Employee</button>
+        </form> 
+
+    </div>
+
+
+
+    
+    
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+</body>
+</html>
